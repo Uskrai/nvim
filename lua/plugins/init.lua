@@ -384,6 +384,18 @@ require("lazy").setup({
         event = on_file_open(),
         config = load_config("blankline")
     },
+
+    {
+        "folke/twilight.nvim",
+        init = function ()
+            require("twilight").enable();
+        end,
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        }
+    },
     -- }} appereance
     {
         'editorconfig/editorconfig-vim',
