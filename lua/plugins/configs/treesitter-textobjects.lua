@@ -10,7 +10,7 @@ require 'nvim-treesitter.configs'.setup {
                 -- You can use the capture groups defined in textobjects.scm
                 ["am"] = "@function.outer",
                 ["im"] = "@function.inner",
-                ["a]"] = "@class.outer",
+                ["ac"] = "@class.outer",
                 -- You can optionally set descriptions to the mappings (used in the desc parameter of
                 -- nvim_buf_set_keymap) which plugins like which-key display
                 ["i]"] = { query = "@class.inner", desc = "Select inner part of a class region" },
@@ -50,7 +50,7 @@ require'nvim-treesitter.configs'.setup {
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
         ["]m"] = "@function.outer",
-        ["]]"] = { query = "@class.outer", desc = "Next class start" },
+        ["]c"] = { query = "@class.outer", desc = "Next class start" },
         --
         -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
         ["]o"] = "@loop.*",
@@ -63,15 +63,15 @@ require'nvim-treesitter.configs'.setup {
       },
       goto_next_end = {
         ["]M"] = "@function.outer",
-        ["]["] = "@class.outer",
+        ["]c"] = "@class.outer",
       },
       goto_previous_start = {
         ["[m"] = "@function.outer",
-        ["[["] = "@class.outer",
+        ["[c"] = "@class.outer",
       },
       goto_previous_end = {
         ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer",
+        ["[c"] = "@class.outer",
       },
       -- Below will go to either the start or the end, whichever is closer.
       -- Use if you want more granular movements
