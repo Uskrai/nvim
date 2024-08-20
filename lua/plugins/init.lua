@@ -463,20 +463,41 @@ require("lazy").setup({
     -- }} document reading
 
 
+    -- {
+    --     'rmagatti/auto-session',
+    --     lazy = false,
+    --     init = function()
+    --         vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+    --         -- vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages"
+    --         -- vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages,resize,winpos"
+    --     end,
+    --     opts = {}
+    --     -- config = function()
+    --     --     require("auto-session").setup {
+    --     --
+    --     --     }
+    --     -- end
+    -- },
+    -- Lua
     {
-        'rmagatti/auto-session',
+        "folke/persistence.nvim",
         lazy = false,
+        opts = {
+            -- add any custom options here
+        },
         init = function()
-            vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-            -- vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages"
-            -- vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages,resize,winpos"
-        end,
-        opts = {}
-        -- config = function()
-        --     require("auto-session").setup {
-        --
-        --     }
-        -- end
+            -- load the session for the current directory
+            vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end)
+
+            -- select a session to load
+            vim.keymap.set("n", "<leader>qS", function() require("persistence").select() end)
+
+            -- load the last session
+            vim.keymap.set("n", "<leader>ql", function() require("persistence").load({ last = true }) end)
+
+            -- stop Persistence => session won't be saved on exit
+            vim.keymap.set("n", "<leader>qd", function() require("persistence").stop() end)
+        end
     },
 
     {
