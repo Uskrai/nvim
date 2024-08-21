@@ -145,7 +145,7 @@ require("lazy").setup({
 
     {
         "L3MON4D3/LuaSnip",
-        tag = "v2.2.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- tag = "v2.2.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         -- opt = true,
         event = on_file_open(),
         config = load_config("luasnip"),
