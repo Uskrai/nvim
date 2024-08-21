@@ -398,8 +398,8 @@ require("lazy").setup({
 
     {
         "folke/twilight.nvim",
-        init = function ()
-            require("twilight").enable();
+        init = function()
+            -- require("twilight").enable();
         end,
         opts = {
             -- your configuration comes here
