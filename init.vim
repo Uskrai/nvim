@@ -19,8 +19,6 @@ set backspace=indent,eol,start
 set mouse=a
 set clipboard=unnamedplus
 
-set sessionoptions+=resize,winpos,terminal
-
 " set foldmethod=syntax
 " set foldmethod=expr
 " set foldexpr=nvim_treesitter#foldexpr()

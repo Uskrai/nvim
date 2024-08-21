@@ -28,13 +28,7 @@ vim.g.local_history_exclude = {
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.opt.sessionoptions:remove "winsize"
+vim.opt.sessionoptions:append "globals"
 
 require "plugins"
-
-
--- require("plugins")
--- require("comment")
--- require("completion")
--- require("picker")
--- require("lsp")
--- require("status")
