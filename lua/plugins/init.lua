@@ -494,9 +494,17 @@ require("lazy").setup({
     {
         "folke/persistence.nvim",
         lazy = false,
-        opts = {
-            -- add any custom options here
-        },
+        config = function()
+            require("persistence").setup {
+            }
+            vim.api.nvim_create_autocmd({ "User" }, {
+                pattern = "PersistenceSavePre",
+                callback = function()
+                    vim.api.nvim_exec_autocmds('User', { pattern = 'SessionSavePre' })
+                end
+            })
+        end,
+        -- add any custom options here
         init = function()
             -- load the session for the current directory
             vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end)
