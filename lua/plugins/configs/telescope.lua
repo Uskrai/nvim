@@ -18,8 +18,5 @@ telescope.setup({
       follow = true
     }
   },
-  defaults = {
-    layout_strategy = 'vertical',
-    path_display = { "truncate" },
-  }
+  defaults = vim.tbl_extend("force", require("telescope.themes").get_ivy(), {  })
 })

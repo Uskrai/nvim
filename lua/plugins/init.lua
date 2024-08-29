@@ -247,6 +247,11 @@ require("lazy").setup({
     {
         "aznhe21/actions-preview.nvim",
         config = function()
+            require("actions-preview").setup {
+                telescope = require("telescope.themes").get_ivy(),
+
+                -- telescope = vim.tbl_extend("force", require("telescope.themes").get_ivy())
+            }
             vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
         end,
     },
