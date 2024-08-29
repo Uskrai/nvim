@@ -235,7 +235,10 @@ require("lazy").setup({
     -- },
 
     {
-        'lvimuser/lsp-inlayhints.nvim',
+        "felpafel/inlay-hint.nvim",
+        opts = {
+            virt_text_pos = "eol"
+        },
         -- config = function()
         --     require("lsp-inlayhints").setup()
         -- end

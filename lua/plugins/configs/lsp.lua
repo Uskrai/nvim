@@ -67,7 +67,7 @@ end
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   on_attach_without_inlay(client, bufnr)
-  require("lsp-inlayhints").on_attach(client, bufnr)
+  vim.lsp.inlay_hint.enable(true)
 end
 
 
