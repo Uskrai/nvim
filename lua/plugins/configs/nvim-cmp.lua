@@ -48,8 +48,7 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
     -- { name = 'vsnip' }, -- For vsnip users.
     { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
+    { name = 'dotenv' },
   }, {
     { name = 'buffer' },
     { name = 'path' },
