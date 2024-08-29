@@ -55,8 +55,6 @@ nnoremap <leader>fp <cmd>Telescope frecency<cr>
 autocmd BufEnter *fmr/src/*.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:|src|include/fmr|'
 autocmd BufEnter *fmr/include/fmr/*.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs = 'reg:|include/fmr|src|'
 
-noremap <S-o> :FSHere<cr>
-
 noremap <Leader>dvo :DiffviewOpen<cr>
 noremap <leader>dvc :DiffviewClose<cr>
 noremap <leader>dvfh :DiffviewFileHistory<cr>
