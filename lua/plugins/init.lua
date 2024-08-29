@@ -38,6 +38,13 @@ require("lazy").setup({
         end
     },
     {
+        "tris203/precognition.nvim",
+        opts = {
+        },
+        event = on_file_open(),
+        cmd = { "Precognition" }
+    },
+    {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         event = on_file_open(),
