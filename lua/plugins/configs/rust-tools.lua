@@ -1,14 +1,10 @@
 local lsp = require "plugins.configs.lsp"
 
-local rt = require("rust-tools")
-
-local default_root_dir = require "lspconfig.server_configurations.rust_analyzer".default_config.root_dir
-
 local last_ra = nil
 
-rt.setup({
+vim.g.rustaceanvim = {
   server = {
-    on_attach = lsp.on_attach_without_inlay,
+    on_attach = lsp.on_attach,
     capabilities = lsp.capabilities,
     flags = lsp.flags,
     -- cmd = { "ra-multiplex" },
@@ -23,7 +19,7 @@ rt.setup({
       }
     },
 
-    root_dir = function(fname)
+    root_dir = function(fname, default_root_dir)
       local is_cargo = vim.fn.match(fname, os.getenv("CARGO_HOME")) ~= -1
       local is_toolchain = vim.fn.match(fname, os.getenv("RUSTUP_HOME")) ~= -1
 
@@ -37,7 +33,6 @@ rt.setup({
         last_ra = default_root_dir(fname)
         return last_ra
       end
-
     end
   },
-})
+}

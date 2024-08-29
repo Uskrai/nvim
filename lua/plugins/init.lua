@@ -244,16 +244,22 @@ require("lazy").setup({
     "weilbith/nvim-code-action-menu",
 
     {
-        'simrat39/rust-tools.nvim',
-        dependencies = {
-            'neovim/nvim-lspconfig',
-        },
-        -- ft = 'rust',
-        -- opt = true,
-        after = 'nvim-lspconfig',
-        config = load_config("rust-tools")
-        -- config = require "lazy_load".create_config "rust-tools"
+        'mrcjkb/rustaceanvim',
+        lazy = false, -- This plugin is already lazy
+        after = "nvim-lspconfig",
+        config = load_config("rust-tools"),
     },
+    -- {
+    --     'simrat39/rust-tools.nvim',
+    --     dependencies = {
+    --         'neovim/nvim-lspconfig',
+    --     },
+    --     -- ft = 'rust',
+    --     -- opt = true,
+    --     after = 'nvim-lspconfig',
+    --     config = load_config("rust-tools")
+    --     -- config = require "lazy_load".create_config "rust-tools"
+    -- },
 
     {
         'akinsho/flutter-tools.nvim',
