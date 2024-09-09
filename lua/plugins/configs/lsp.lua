@@ -123,7 +123,7 @@ require "lspconfig".eslint.setup {
   capabilities = capabilities
 }
 
-require 'lspconfig'.tsserver.setup {
+require 'lspconfig'.ts_ls.setup {
   -- disable_commands = false,
   -- debug = false,
   -- server = {
