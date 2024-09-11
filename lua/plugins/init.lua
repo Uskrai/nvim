@@ -31,7 +31,7 @@ require("lazy").setup({
     { 'nvim-lua/plenary.nvim' },
     {
         'ggandor/leap.nvim',
-        opt = true,
+        opts = true,
         event = on_file_open(),
         config = function()
             require "leap".add_default_mappings()
@@ -153,7 +153,7 @@ require("lazy").setup({
     {
         "L3MON4D3/LuaSnip",
         -- tag = "v2.2.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- opt = true,
+        -- opts = true,
         event = on_file_open(),
         config = load_config("luasnip"),
         build = "make install_jsregexp",
@@ -163,13 +163,13 @@ require("lazy").setup({
     -- Use dependency and run lua function after load
     -- use {
     --     'SirVer/ultisnips',
-    --     opt = true,
+    --     opts = true,
     --     setup = require "lazy_load".on_file_open "ultisnips"
     -- };
     --
     -- use {
     --     'honza/vim-snippets',
-    --     opt = true,
+    --     opts = true,
     --     setup = require "lazy_load".on_file_open "vim-snippets"
     -- };
 
@@ -189,7 +189,7 @@ require("lazy").setup({
 
     {
         'windwp/nvim-autopairs',
-        -- opt = true,
+        -- opts = true,
         -- event = on_file_open(),
         config = function()
             require("nvim-autopairs").setup()
@@ -200,7 +200,7 @@ require("lazy").setup({
 
     -- use {
     --     'tpope/vim-fugitive',
-    --     opt = true,
+    --     opts = true,
     --     setup = require "lazy_load".on_file_open "vim-fugitive",
     -- }
     { 'tpope/vim-repeat' },
@@ -220,7 +220,7 @@ require("lazy").setup({
     --
     -- use {
     --     'preservim/nerdtree',
-    --     opt = true,
+    --     opts = true,
     --     cmd = {
     --         'NERDTree',
     --     }
@@ -275,7 +275,7 @@ require("lazy").setup({
     --         'neovim/nvim-lspconfig',
     --     },
     --     -- ft = 'rust',
-    --     -- opt = true,
+    --     -- opts = true,
     --     after = 'nvim-lspconfig',
     --     config = load_config("rust-tools")
     --     -- config = require "lazy_load".create_config "rust-tools"
@@ -288,14 +288,14 @@ require("lazy").setup({
         },
         after = 'nvim-lspconfig',
         config = load_config("flutter-tools"),
-        -- opt = true,
+        -- opts = true,
         -- config = require "lazy_load".create_config "flutter-tools"
     },
 
     {
         'j-hui/fidget.nvim',
         branch = 'legacy',
-        -- opt = true,
+        -- opts = true,
         -- after = 'nvim-lspconfig',
         config = function()
             require "fidget".setup {
@@ -307,7 +307,7 @@ require("lazy").setup({
     },
     {
         "ThePrimeagen/refactoring.nvim",
-        -- opt = true,
+        -- opts = true,
         -- after = 'nvim-lspconfig',
         -- dependencies = {
         --     "nvim-lua/plenary.nvim",
@@ -329,7 +329,7 @@ require("lazy").setup({
     },
     {
         "MagicDuck/grug-far.nvim",
-        opt = {
+        opts = {
             engine = 'astgrep'
         },
     },
@@ -423,7 +423,7 @@ require("lazy").setup({
     },
     {
         'stevearc/dressing.nvim',
-        -- opt = true,
+        -- opts = true,
         event = on_file_open(),
         config = function()
             require('dressing').setup();
@@ -455,7 +455,7 @@ require("lazy").setup({
 
     {
         'lukas-reineke/indent-blankline.nvim',
-        -- opt = true,
+        -- opts = true,
         event = on_file_open(),
         config = load_config("blankline")
     },
@@ -474,7 +474,7 @@ require("lazy").setup({
     -- }} appereance
     {
         'editorconfig/editorconfig-vim',
-        -- opt = true,
+        -- opts = true,
         event = on_file_open(),
         setup = function()
             require "editorconfig"
@@ -485,7 +485,7 @@ require("lazy").setup({
         'junegunn/fzf.vim',
         name = "fzf.vim",
         dependencies = { "junegunn/fzf" },
-        -- opt = true,
+        -- opts = true,
         cmd = lazy_load.fzf_cmds,
     },
     --
@@ -493,13 +493,13 @@ require("lazy").setup({
     --
     -- use {
     --     'sheerun/vim-polyglot',
-    --     opt = true,
+    --     opts = true,
     -- }
     'jwalton512/vim-blade',
     --
     -- use {
     --     'derekwyatt/vim-fswitch',
-    --     opt = true,
+    --     opts = true,
     --     ft = {
     --         'cpp',
     --         'c'
@@ -510,7 +510,7 @@ require("lazy").setup({
 
     -- {
     --     'luochen1990/rainbow',
-    --     -- opt = true,
+    --     -- opts = true,
     --     event = on_file_open(),
     -- },
 
@@ -597,7 +597,7 @@ require("lazy").setup({
 
     {
         'kyazdani42/nvim-web-devicons',
-        -- opt = true,
+        -- opts = true,
         event = on_file_open(),
     },
 
@@ -607,7 +607,7 @@ require("lazy").setup({
         init = function() vim.g.barbar_auto_setup = false end,
         -- opts = {},
         config = load_config("barbar"),
-        -- opt = true,
+        -- opts = true,
         event = on_file_open(),
     },
 
@@ -618,7 +618,7 @@ require("lazy").setup({
 
     {
         'andweeb/presence.nvim',
-        opt = true,
+        opts = true,
         event = on_file_open(),
         config = function()
             require("presence").setup({
@@ -633,7 +633,7 @@ require("lazy").setup({
 
     {
         'tpope/vim-sleuth',
-        -- opt = true,
+        -- opts = true,
         event = on_file_open(),
     },
 
@@ -646,7 +646,7 @@ require("lazy").setup({
         dependencies = {
             'kevinhwang91/promise-async'
         },
-        -- opt = true,
+        -- opts = true,
         config = load_config("nvim-ufo"),
         event = on_file_open(),
         -- config = require "lazy_load".create_config "nvim-ufo",
@@ -656,13 +656,13 @@ require("lazy").setup({
     -- FOLD
     -- use {
     --     'Konfekt/FastFold',
-    --     opt = true,
+    --     opts = true,
     --     setup = require "lazy_load".on_file_open "FastFold",
     -- }
 
     {
         'dinhhuy258/vim-local-history',
-        -- opt = true,
+        -- opts = true,
         event = on_file_open(),
         build = ":UpdateRemotePlugins"
     },
