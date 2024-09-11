@@ -330,7 +330,7 @@ require("lazy").setup({
     {
         "MagicDuck/grug-far.nvim",
         opts = {
-            engine = 'astgrep'
+            engine = 'ripgrep',
         },
     },
 
