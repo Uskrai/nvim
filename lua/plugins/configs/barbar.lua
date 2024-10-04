@@ -43,5 +43,12 @@ map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
 map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
 map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
+
+vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete' }, {
+    callback = vim.schedule_wrap(function()
+        vim.cmd.BufferOrderByDirectory()
+    end)
+})
+
 -- Other:
 -- :BarbarEnable - enables barbar ()
