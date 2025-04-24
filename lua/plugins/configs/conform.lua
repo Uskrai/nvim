@@ -18,3 +18,21 @@ require("conform").setup {
         php = { "pint", "prettier", stop_after_first = true }
     },
 }
+
+local function format(context)
+  require("conform").format({
+    async = true,
+    lsp_format = "fallback",
+    -- filter = function(client)
+    --   if client.name ~= "tsserver" then
+    --     return true
+    --   end
+    --
+    --   return false
+    -- end,
+    timeout_ms = 5000,
+  })
+end
+
+local opts = { noremap = true, silent = true }
+vim.keymap.set('n', '<space>f', format, opts)

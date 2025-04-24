@@ -20,3 +20,10 @@ telescope.setup({
   },
   defaults = vim.tbl_extend("force", require("telescope.themes").get_ivy(), {  })
 })
+
+
+-- nnoremap <leader>ff <cmd>Telescope find_files<cr>
+-- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+-- nnoremap <leader>fb <cmd>Telescope buffers<cr>
+-- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+-- nnoremap <leader>fp <cmd>Telescope frecency<cr>

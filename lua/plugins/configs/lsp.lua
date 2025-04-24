@@ -1,18 +1,3 @@
-local function format(context)
-  require("conform").format({
-    async = true,
-    lsp_format = "fallback",
-    filter = function(client)
-      if client.name ~= "tsserver" then
-        return true
-      end
-
-      return false
-    end,
-    timeout_ms = 5000,
-  })
-end
-
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
@@ -23,7 +8,6 @@ vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-vim.keymap.set('n', '<space>f', format, opts)
 
 -- local lsp_formatting = function(bufnr)
 --
@@ -60,7 +44,6 @@ local on_attach_without_inlay = function(_, bufnr)
   vim.keymap.set('n', '<leader>a', code_action, bufopts)
   -- vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', ':Telescope lsp_references<cr>', bufopts)
-  vim.keymap.set('n', '<space>f', format, bufopts)
 end
 
 -- Use an on_attach function to only map the following keys
@@ -87,6 +70,8 @@ capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabil
   }
 })
 -- local capabilities = require"coq".lsp_ensure_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+local lspconfig = require'lspconfig';
 
 -- require('lspconfig')['pyright'].setup {
 --   on_attach = on_attach,
@@ -179,6 +164,50 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 --   enable_lsp_lines,
 --   { desc = "Toggle lsp_lines" }
 -- )
+
+-- require("flutter-tools").setup{
+--   lsp = {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--   }
+-- } -- use defaults
+
+
+local last_ra = nil
+
+vim.g.rustaceanvim = {
+  server = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    -- cmd = { "ra-multiplex" },
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+        },
+        checkOnSave = {
+          command = "clippy"
+        }
+      }
+    },
+
+    root_dir = function(fname, default_root_dir)
+      local is_cargo = vim.fn.match(fname, os.getenv("CARGO_HOME")) ~= -1
+      local is_toolchain = vim.fn.match(fname, os.getenv("RUSTUP_HOME")) ~= -1
+
+      local is_readonly = is_cargo or is_toolchain
+
+      if is_readonly and last_ra ~= nil then
+        return last_ra
+      elseif is_readonly then
+        return default_root_dir(fname)
+      else
+        last_ra = default_root_dir(fname)
+        return last_ra
+      end
+    end
+  },
+}
 
 return {
   on_attach = on_attach,

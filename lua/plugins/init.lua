@@ -11,14 +11,17 @@ local treesitter_cmds = {
 }
 
 
+
 local lazy_load = require "lazy_load"
 
-local function on_file_open()
-    return {
-        "BufRead", "BufWinEnter", "BufNewFile",
-    }
-end
+local on_file_open = { "BufRead", "BufNewFile" }
 
+-- local function on_file_open
+--     return {
+--         "BufRead", "BufNewFile",
+--     }
+-- end
+--
 local function load_config(name)
     return function()
         return lazy_load.create_config(name)
@@ -28,28 +31,28 @@ end
 require('vim.lsp._watchfiles')._watchfunc = function(_, _, _) return true end
 
 require("lazy").setup({
+    { "dstein64/vim-startuptime", lazy = false, },
     { 'nvim-lua/plenary.nvim' },
     {
         'ggandor/leap.nvim',
         opts = true,
-        event = on_file_open(),
+        event = on_file_open,
         init = function()
             vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
             vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
-        end
+    	end,
+        event = on_file_open,
     },
     {
         "tris203/precognition.nvim",
         opts = {
         },
-        event = on_file_open(),
+        event = on_file_open,
         cmd = { "Precognition" }
     },
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        event = on_file_open(),
-        cmd = treesitter_cmds,
         lazy = false,
         dependencies = {
             'JoosepAlviste/nvim-ts-context-commentstring',
@@ -62,6 +65,7 @@ require("lazy").setup({
     },
     {
         'JoosepAlviste/nvim-ts-context-commentstring',
+        event = on_file_open,
         after = 'nvim-treesitter',
         setup = function()
             vim.g.skip_ts_context_commentstring_module = true
@@ -72,22 +76,26 @@ require("lazy").setup({
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
+        event = on_file_open,
         after = 'nvim-treesitter',
         config = load_config("treesitter-context")
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        event = on_file_open,
         after = "nvim-treesitter",
         requires = "nvim-treesitter/nvim-treesitter",
         config = load_config("treesitter-textobjects")
     },
     {
         'windwp/nvim-ts-autotag',
+        event = on_file_open,
         after = 'nvim-treesitter',
     },
     -- treesitter plugin
     {
         'nvim-treesitter/playground',
+        event = on_file_open,
     },
     -- {
     --     'SmiteshP/nvim-navic',
@@ -117,13 +125,17 @@ require("lazy").setup({
                     'RainbowDelimiterCyan',
                 },
             }
-        end
-        -- event = on_file_open()
+        end,
+        lazy = true,
+        event = on_file_open,
     },
 
     { "folke/todo-comments.nvim" },
     {
         'lewis6991/gitsigns.nvim',
+        lazy = true,
+        cmd = { "Gitsigns" },
+        event = on_file_open,
         requires = { 'nvim-lua/plenary.nvim' },
         config = load_config("gitsigns")
     },
@@ -138,7 +150,7 @@ require("lazy").setup({
 
     -- {
     --     'tpope/vim-surround',
-    --     event = on_file_open(),
+    --     event = on_file_open,
     -- },
 
     {
@@ -156,7 +168,7 @@ require("lazy").setup({
         "L3MON4D3/LuaSnip",
         -- tag = "v2.2.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         -- opts = true,
-        event = on_file_open(),
+        event = on_file_open,
         config = load_config("luasnip"),
         build = "make install_jsregexp",
     },
@@ -191,8 +203,8 @@ require("lazy").setup({
 
     {
         'windwp/nvim-autopairs',
-        -- opts = true,
-        -- event = on_file_open(),
+        lazy = true,
+        event = on_file_open,
         config = function()
             require("nvim-autopairs").setup()
         end
@@ -207,17 +219,14 @@ require("lazy").setup({
     -- }
     { 'tpope/vim-repeat' },
 
-    -- comment
-    -- use {'preservim/nerdcommenter'}
     {
         'numToStr/Comment.nvim',
         after = 'nvim-treesitter',
         dependencies = {
             'JoosepAlviste/nvim-ts-context-commentstring',
         },
-        event = on_file_open(),
+        event = on_file_open,
         config = load_config("comment")
-        -- config = require "lazy_load".create_config "comment"
     },
     --
     -- use {
@@ -230,31 +239,37 @@ require("lazy").setup({
     --
     -- -- LSP
     -- -- use {'neoclide/coc.nvim', run = {'yarn install --frozen-lockfile'}}
-    -- {
-    --     'neovim/nvim-lspconfig',
-    --     config = load_config("lsp"),
-    --     dependencies = {
-    --         -- 'simrat39/rust-tools.nvim',
-    --         -- 'akinsho/flutter-tools.nvim',
-    --         "ThePrimeagen/refactoring.nvim",
-    --         'j-hui/fidget.nvim',
-    --     },
-    --     event = on_file_open(),
-    --     -- config = require "lazy_load".create_config "lsp",
-    -- },
+    {
+        'neovim/nvim-lspconfig',
+        lazy = false,
+        config = load_config("lsp"),
+        dependencies = {
+            'mrcjkb/rustaceanvim',
+            'akinsho/flutter-tools.nvim',
+            "ThePrimeagen/refactoring.nvim",
+            'j-hui/fidget.nvim',
+        },
+        event = on_file_open,
+        -- config = require "lazy_load".create_config "lsp",
+    },
 
-    -- {
-    --     "felpafel/inlay-hint.nvim",
-    --     opts = {
-    --         virt_text_pos = "eol"
-    --     },
-    --     -- config = function()
-    --     --     require("lsp-inlayhints").setup()
-    --     -- end
-    -- },
+    {
+        "felpafel/inlay-hint.nvim",
+        lazy = true,
+        event = on_file_open,
+        opts = {
+            virt_text_pos = "eol"
+        },
+        -- config = function()
+        --     require("lsp-inlayhints").setup()
+        -- end
+    },
 
     {
         "aznhe21/actions-preview.nvim",
+        lazy = true,
+        event = on_file_open,
+        after = 'nvim-telescope/telescope.nvim',
         config = function()
             require("actions-preview").setup {
                 telescope = require("telescope.themes").get_ivy(),
@@ -267,9 +282,7 @@ require("lazy").setup({
 
     {
         'mrcjkb/rustaceanvim',
-        lazy = false, -- This plugin is already lazy
-        after = "nvim-lspconfig",
-        config = load_config("rust-tools"),
+        lazy = true, -- This plugin is already lazy
     },
     -- {
     --     'simrat39/rust-tools.nvim',
@@ -283,19 +296,17 @@ require("lazy").setup({
     --     -- config = require "lazy_load".create_config "rust-tools"
     -- },
 
-    {
-        'akinsho/flutter-tools.nvim',
-        dependencies = {
-            'neovim/nvim-lspconfig',
-        },
-        after = 'nvim-lspconfig',
-        config = load_config("flutter-tools"),
-        -- opts = true,
-        -- config = require "lazy_load".create_config "flutter-tools"
-    },
+    -- {
+    --     'akinsho/flutter-tools.nvim',
+    --     dependencies = {
+    --         'neovim/nvim-lspconfig',
+    --     },
+    -- },
 
     {
         'j-hui/fidget.nvim',
+        lazy = true,
+        event = on_file_open,
         branch = 'legacy',
         -- opts = true,
         -- after = 'nvim-lspconfig',
@@ -321,16 +332,22 @@ require("lazy").setup({
             'nvim-lspconfig',
             'refactoring.nvim',
         },
+        lazy = true,
+        event = on_file_open,
         -- after = { 'nvim-lspconfig', 'refactoring.nvim' },
         config = load_config("null-ls"),
         -- config = require "lazy_load".create_config "null-ls",
     },
     {
         'stevearc/conform.nvim',
+        lazy = true,
+        event = on_file_open,
         config = load_config("conform"),
     },
     {
         "MagicDuck/grug-far.nvim",
+        lazy = true,
+        cmd = { "GrugFar", "GrugFarWithin" },
         opts = {
             engine = 'ripgrep',
         },
@@ -338,14 +355,15 @@ require("lazy").setup({
 
     {
         'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-        event = on_file_open(),
+        event = on_file_open,
     },
 
     -- -- completion
     -- -- use { 'ms-jpq/coq_nvim' }
     {
         'hrsh7th/nvim-cmp',
-        event = on_file_open(),
+        lazy = true,
+        event = { "CmdLineEnter", table.unpack(on_file_open) },
         config = load_config("nvim-cmp"),
         dependencies = {
             -- 'windwp/nvim-autopairs',
@@ -362,6 +380,8 @@ require("lazy").setup({
     },
     {
         'kosayoda/nvim-lightbulb',
+        lazy = true,
+        event = on_file_open,
         dependencies = {
             'antoinemadec/FixCursorHold.nvim',
         },
@@ -420,13 +440,15 @@ require("lazy").setup({
     -- Appereance{{
     {
         "hoob3rt/lualine.nvim",
+        lazy = true,
+        event = { "VimEnter", "ModeChanged", table.unpack(on_file_open) },
         config = load_config("status")
         -- config = require "lazy_load".create_config "status"
     },
     {
         'stevearc/dressing.nvim',
         -- opts = true,
-        event = on_file_open(),
+        event = on_file_open,
         config = function()
             require('dressing').setup();
         end
@@ -465,15 +487,17 @@ require("lazy").setup({
     --     branch = "main"
     -- }
 
-    -- {
-    --     'lukas-reineke/indent-blankline.nvim',
-    --     -- opts = true,
-    --     event = on_file_open(),
-    --     config = load_config("blankline")
-    -- },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        -- opts = true,
+        event = on_file_open,
+        config = load_config("blankline")
+    },
 
     {
         "folke/twilight.nvim",
+        lazy = true,
+        event = on_file_open,
         init = function()
             -- require("twilight").enable();
         end,
@@ -487,7 +511,7 @@ require("lazy").setup({
     {
         'editorconfig/editorconfig-vim',
         -- opts = true,
-        event = on_file_open(),
+        event = on_file_open,
         setup = function()
             require "editorconfig"
         end
@@ -523,7 +547,7 @@ require("lazy").setup({
     -- {
     --     'luochen1990/rainbow',
     --     -- opts = true,
-    --     event = on_file_open(),
+    --     event = on_file_open,
     -- },
 
     -- use { 'andrejlevkovitch/vim-lua-format' }
@@ -610,7 +634,7 @@ require("lazy").setup({
     {
         'kyazdani42/nvim-web-devicons',
         -- opts = true,
-        event = on_file_open(),
+        event = on_file_open,
     },
 
     {
@@ -620,7 +644,7 @@ require("lazy").setup({
         -- opts = {},
         config = load_config("barbar"),
         -- opts = true,
-        event = on_file_open(),
+        event = on_file_open,
     },
 
     {
@@ -660,7 +684,7 @@ require("lazy").setup({
     {
         'tpope/vim-sleuth',
         -- opts = true,
-        event = on_file_open(),
+        event = on_file_open,
     },
 
     -- FOLD
@@ -674,7 +698,8 @@ require("lazy").setup({
         },
         -- opts = true,
         config = load_config("nvim-ufo"),
-        event = on_file_open(),
+        lazy = true,
+        event = on_file_open,
         -- config = require "lazy_load".create_config "nvim-ufo",
     },
 
@@ -689,7 +714,7 @@ require("lazy").setup({
     {
         'dinhhuy258/vim-local-history',
         -- opts = true,
-        event = on_file_open(),
+        event = on_file_open,
         build = ":UpdateRemotePlugins"
     },
 

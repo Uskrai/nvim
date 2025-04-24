@@ -171,8 +171,8 @@ function MakeTransparent()
 endfunction
 
 " transparent bg
-autocmd vimenter * call MakeTransparent()
-autocmd ColorScheme * call MakeTransparent()
+" autocmd vimenter * call MakeTransparent()
+" autocmd ColorScheme * call MakeTransparent()
 
 " autocmd VimEnter * highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 " autocmd VimEnter * match OverLength /\%81v.\+/
@@ -181,13 +181,13 @@ autocmd ColorScheme * call MakeTransparent()
 
 " colorscheme material
 
-function SetupRust()
-  set tabstop=4
-  set shiftwidth=4
-  set softtabstop=4
-endfunction
-
-autocmd BufNewFile,BufRead *.rs,*.rn,*.xml call SetupRust()
+" function SetupRust()
+"   set tabstop=4
+"   set shiftwidth=4
+"   set softtabstop=4
+" endfunction
+"
+" autocmd BufNewFile,BufRead *.rs,*.rn,*.xml call SetupRust()
 
 function SetupLatex()
   set tw=80
