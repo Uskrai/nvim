@@ -241,15 +241,15 @@ require("lazy").setup({
     --     -- config = require "lazy_load".create_config "lsp",
     -- },
 
-    {
-        "felpafel/inlay-hint.nvim",
-        opts = {
-            virt_text_pos = "eol"
-        },
-        -- config = function()
-        --     require("lsp-inlayhints").setup()
-        -- end
-    },
+    -- {
+    --     "felpafel/inlay-hint.nvim",
+    --     opts = {
+    --         virt_text_pos = "eol"
+    --     },
+    --     -- config = function()
+    --     --     require("lsp-inlayhints").setup()
+    --     -- end
+    -- },
 
     {
         "aznhe21/actions-preview.nvim",
@@ -453,12 +453,12 @@ require("lazy").setup({
     --     branch = "main"
     -- }
 
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        -- opts = true,
-        event = on_file_open(),
-        config = load_config("blankline")
-    },
+    -- {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     -- opts = true,
+    --     event = on_file_open(),
+    --     config = load_config("blankline")
+    -- },
 
     {
         "folke/twilight.nvim",
@@ -719,4 +719,14 @@ require("lazy").setup({
     --         }
     --     end
     -- };
+    {
+        "https://github.com/folke/snacks.nvim",
+        opts = {
+            indent = {},
+            bigfile = {
+
+            }
+        }
+
+    },
 })
