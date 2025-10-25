@@ -93,136 +93,37 @@ capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabil
 --   flags = lsp_flags,
 --   capabilities = capabilities,
 -- }
-require 'lspconfig'.pylsp.setup {
+
+
+vim.lsp.config('*', {
   on_attach = on_attach,
-  flags = lsp_flags,
   capabilities = capabilities,
-  -- settings = {
-  --   pylsp = {
-  --     plugins = {
-  --       rope_autoimport = {
-  --         enabled = true,
-  --         memory = true
-  --       }
-  --     }
-  --   }
-  -- }
-}
-
-require "lspconfig".ruff.setup {
-  on_attach = on_attach,
   flags = lsp_flags,
-  capabilities = capabilities,
-}
-
--- require ""
-
-require "lspconfig".eslint.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities
-}
-
-require 'lspconfig'.ts_ls.setup {
-  -- disable_commands = false,
-  -- debug = false,
-  -- server = {
-  on_attach = on_attach,
-  root_dir = require "lspconfig".util.root_pattern("package.json"),
-  flags = lsp_flags,
-  capabilities = capabilities,
-  single_file_support = false
-
-  -- }
-}
-
-require 'lspconfig'.denols.setup {
-  on_attach = on_attach,
-  root_dir = require "lspconfig".util.root_pattern("deno.json"),
-  flags = lsp_flags,
-  capabilities = capabilities
-}
+})
 
 
-require 'lspconfig'.clangd.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities
-}
+vim.lsp.enable("pylsp")
+vim.lsp.enable("ruff");
+vim.lsp.enable("eslint")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("clangd")
+vim.lsp.enable("zls")
+vim.lsp.enable("gopls")
+vim.lsp.enable("html")
+vim.lsp.enable("cssls")
+vim.lsp.enable("dockerls")
+vim.lsp.enable("jdtls")
+vim.lsp.enable("csharp_ls")
+vim.lsp.enable("dartls")
 
---[[ require('lspconfig')['rust_analyzer'].setup{ ]]
---[[   on_attach = on_attach, ]]
---[[   flags = lsp_flags, ]]
---[[   capabilities = capabilities, ]]
---[[   -- Server-specific settings... ]]
---[[   settings = { ]]
---[[     ["rust-analyzer"] = {} ]]
---[[   } ]]
---[[ } ]]
-require 'lspconfig'.intelephense.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-  settings = {
 
-  },
+vim.lsp.config("intelephense", {
   init_options = {
     licenceKey = 'CodeCodeCodeCode',
   }
-}
+})
 
-require 'lspconfig'.zls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
-require 'lspconfig'.gopls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
--- require 'lspconfig'.emmet_ls.setup {
---   on_attach = on_attach,
---   flags = lsp_flags,
---   capabilities = capabilities,
--- }
-
-require 'lspconfig'.html.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
-require 'lspconfig'.cssls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
--- require 'lspconfig'.jsonls.setup {
---   on_attach = on_attach,
---   flags = lsp_flags,
---   capabilities = capabilities,
--- }
-
-require 'lspconfig'.dockerls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
-require 'lspconfig'.jdtls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
-require 'lspconfig'.lua_ls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
+vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
       runtime = {
@@ -243,7 +144,18 @@ require 'lspconfig'.lua_ls.setup {
       },
     }
   }
-}
+})
+
+vim.lsp.config("ts_ls", {
+
+  root_dir = require "lspconfig".util.root_pattern("package.json"),
+  single_file_support = false
+})
+
+vim.lsp.config("denols", {
+  root_dir = require "lspconfig".util.root_pattern("deno.json"),
+})
+
 
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
