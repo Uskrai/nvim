@@ -50,6 +50,7 @@ require("lazy").setup({
         build = ':TSUpdate',
         event = on_file_open(),
         cmd = treesitter_cmds,
+        lazy = false,
         dependencies = {
             'JoosepAlviste/nvim-ts-context-commentstring',
             'nvim-treesitter/nvim-treesitter-context',
