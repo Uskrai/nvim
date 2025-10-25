@@ -33,8 +33,9 @@ require("lazy").setup({
         'ggandor/leap.nvim',
         opts = true,
         event = on_file_open(),
-        config = function()
-            require "leap".add_default_mappings()
+        init = function()
+            vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+            vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
         end
     },
     {
