@@ -623,24 +623,38 @@ require("lazy").setup({
         event = on_file_open(),
     },
 
-    -- use {
-    --     'gelguy/wilder.nvim',
-    --     setup = require"lazy_load".on_file_open"wilder.nvim",
-    -- }
-
     {
-        'andweeb/presence.nvim',
-        opts = true,
-        event = on_file_open(),
+        'vyfor/cord.nvim',
+        build = ':Cord update',
         config = function()
-            require("presence").setup({
-                blacklist = {
-                    "/home/uskrai/project/private",
-                    "/home/uskrai/.local/share/mind.nvim",
-                    "/home/uskrai/project/go/filemover"
-                }
+            local blacklist = {
+                "/home/uskrai/project/private",
+                "/home/uskrai/.local/share/mind.nvim",
+            }
+
+            local is_blacklisted = function(opts)
+                for value in pairs(blacklist) do
+                    if string.match(opts.workspace, value) then
+                        return true
+                    end
+                end
+            end
+
+            require("cord").setup({
+                text = {
+                    viewing = function(opts)
+                        return is_blacklisted(opts) and 'Viewing a file' or ('Viewing ' .. opts.filename)
+                    end,
+                    editing = function(opts)
+                        return is_blacklisted(opts) and 'Editing a file' or ('Editing ' .. opts.filename)
+                    end,
+                    workspace = function(opts)
+                        return is_blacklisted(opts) and 'In a secret workspace' or ('Working on ' .. opts.workspace)
+                    end,
+                },
             })
         end
+        -- opts = {}
     },
 
     {
