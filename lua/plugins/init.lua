@@ -436,14 +436,24 @@ require("lazy").setup({
         'catppuccin/nvim',
         name = "catppuccin",
         config = function()
-            vim.g.catppuccin_flavour = "macchiato"
             require("catppuccin").setup {
+                flavour = "mocha",
+                float = {
+                    transparent = true, -- enable transparent floating windows
+                    solid = false, -- use solid styling for floating windows, see |winborder|
+                },               
+                auto_integrations = true,
                 transparent_background = true,
                 integrations = {
                     gitsigns = true,
                     treesitter = true,
                     barbar = true,
                     rainbow_delimiters = true,
+                    treesitter_context = true,
+                    ufo = true,
+                    telescope = {
+                        enabled = true
+                    }
                 }
             }
             vim.api.nvim_command "colorscheme catppuccin"
