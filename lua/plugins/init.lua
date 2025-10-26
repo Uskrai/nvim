@@ -588,7 +588,7 @@ require("lazy").setup({
 				end,
 			},
 		},
-		init = function ()
+		init = function()
 			vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 		end,
 		-- Optional dependencies
@@ -630,6 +630,7 @@ require("lazy").setup({
 			vim.api.nvim_create_autocmd({ "User" }, {
 				pattern = "PersistenceSavePre",
 				callback = function()
+					-- saving barbar session
 					vim.api.nvim_exec_autocmds("User", { pattern = "SessionSavePre" })
 				end,
 			})
