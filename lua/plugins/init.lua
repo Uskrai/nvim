@@ -542,6 +542,7 @@ require("lazy").setup({
 
 	-- use {'raymond-w-ko/vim-lua-indent'}
 
+	-- Tooling {{
 	{
 		"nvim-telescope/telescope.nvim",
 		config = load_config("telescope"),
@@ -565,6 +566,38 @@ require("lazy").setup({
 		after = "nvim-lua/plenary.nvim",
 		config = load_config("spectre"),
 	},
+
+	{
+		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {
+			keymaps = {
+				-- ["-"] = {"actions.open", mode = "n"},
+			},
+			git = {
+				-- Return true to automatically git add/mv/rm files
+				add = function(path)
+					return false
+				end,
+				mv = function(src_path, dest_path)
+					return true
+				end,
+				rm = function(path)
+					return false
+				end,
+			},
+		},
+		init = function ()
+			vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+		end,
+		-- Optional dependencies
+		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		lazy = false,
+	},
+	-- }} Tooling
 
 	-- document reading {{
 	{
