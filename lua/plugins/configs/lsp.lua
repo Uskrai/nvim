@@ -93,12 +93,15 @@ vim.lsp.enable("jdtls")
 vim.lsp.enable("csharp_ls")
 vim.lsp.enable("dartls")
 
+
+vim.lsp.enable("intelephense")
 vim.lsp.config("intelephense", {
 	init_options = {
 		licenceKey = "CodeCodeCodeCode",
 	},
 })
 
+vim.lsp.enable("lua_ls")
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
@@ -122,12 +125,14 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+vim.lsp.enable("ts_ls")
 vim.lsp.config("ts_ls", {
 
 	-- root_dir = require("lspconfig").util.root_pattern("package.json"),
 	single_file_support = false,
 })
 
+vim.lsp.enable("ts_ls")
 vim.lsp.config("denols", {
 	root_dir = require("lspconfig").util.root_pattern("deno.json"),
 })
