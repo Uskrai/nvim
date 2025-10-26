@@ -244,8 +244,8 @@ require("lazy").setup({
 
 	{
 		"felpafel/inlay-hint.nvim",
-		lazy = true,
-		event = on_file_open,
+		event = "LspAttach",
+		branch = "nightly",
 		opts = {
 			virt_text_pos = "eol",
 		},
