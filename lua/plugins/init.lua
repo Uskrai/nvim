@@ -740,12 +740,7 @@ require("lazy").setup({
 	--     setup = require "lazy_load".on_file_open "FastFold",
 	-- }
 
-	{
-		"dinhhuy258/vim-local-history",
-		-- opts = true,
-		event = on_file_open,
-		build = ":UpdateRemotePlugins",
-	},
+	{"https://github.com/mbbill/undotree"},
 
 	-- {
 	--     'Iron-E/rust.vim',
