@@ -363,7 +363,6 @@ require("lazy").setup({
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 			"saadparwaiz1/cmp_luasnip",
-			"SergioRibera/cmp-dotenv",
 		},
 		-- after = { 'cmp-nvim-lsp', 'cmp-nvim-lsp-signature-help', 'lsp_lines.nvim' }
 	},
