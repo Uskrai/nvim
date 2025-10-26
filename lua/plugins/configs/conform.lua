@@ -14,7 +14,7 @@ require("conform").setup({
 			rust = { "rustfmt" },
 			toml = { "taplo" },
 			python = { "ruff" },
-			php = { "pint", "prettier", stop_after_first = true },
+			php = { "pint", "prettierd", "prettier", stop_after_first = true },
 		},
 	})
 
