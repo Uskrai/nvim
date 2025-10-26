@@ -55,7 +55,6 @@ require("lazy").setup({
 		lazy = false,
 		branch = "main",
 		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring",
 			"nvim-treesitter/nvim-treesitter-context",
 			-- "nvim-treesitter/playground",
 			"SmiteshP/nvim-navic",
@@ -63,17 +62,7 @@ require("lazy").setup({
 		},
 		config = load_config("treesitter"),
 	},
-	{
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		event = on_file_open,
-		after = "nvim-treesitter",
-		setup = function()
-			vim.g.skip_ts_context_commentstring_module = true
-			require("ts_context_commentstring").setup({
-				enable_autocmd = false,
-			})
-		end,
-	},
+
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = on_file_open,
