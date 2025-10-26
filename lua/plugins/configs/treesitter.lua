@@ -1,15 +1,15 @@
-local parser = require("nvim-treesitter.parsers").get_parser_configs()
-parser.dart = {
-	-- https://github.com/nvim-treesitter/nvim-treesitter/issues/4945
-	install_info = {
-		url = "https://github.com/UserNobody14/tree-sitter-dart",
-		files = { "src/parser.c", "src/scanner.c" },
-		revision = "8aa8ab977647da2d4dcfb8c4726341bee26fbce4", -- The last commit before the snail speed
-	},
-}
+-- local parser = require("nvim-treesitter.parsers").get_parser_configs()
+-- parser.dart = {
+-- 	-- https://github.com/nvim-treesitter/nvim-treesitter/issues/4945
+-- 	install_info = {
+-- 		url = "https://github.com/UserNobody14/tree-sitter-dart",
+-- 		files = { "src/parser.c", "src/scanner.c" },
+-- 		revision = "8aa8ab977647da2d4dcfb8c4726341bee26fbce4", -- The last commit before the snail speed
+-- 	},
+-- }
 
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {
+
+require("nvim-treesitter").install {
 		"rust",
 		"dart",
 		"lua",
@@ -41,7 +41,9 @@ require("nvim-treesitter.configs").setup({
 		"ini",
 		"dot",
 		"make",
-	},
+}
+require("nvim-treesitter").setup({
+	install_dir = vim.fn.stdpath("data") .. "/tree-sitter",
 	playground = {
 		enable = true,
 		disable = {},

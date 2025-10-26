@@ -53,10 +53,11 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		lazy = false,
+		branch = "main",
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			"nvim-treesitter/nvim-treesitter-context",
-			"nvim-treesitter/playground",
+			-- "nvim-treesitter/playground",
 			"SmiteshP/nvim-navic",
 			"numToStr/Comment.nvim",
 		},
@@ -81,6 +82,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
 		event = on_file_open,
 		after = "nvim-treesitter",
 		requires = "nvim-treesitter/nvim-treesitter",
@@ -92,10 +94,10 @@ require("lazy").setup({
 		after = "nvim-treesitter",
 	},
 	-- treesitter plugin
-	{
-		"nvim-treesitter/playground",
-		event = on_file_open,
-	},
+	-- {
+	-- 	"nvim-treesitter/playground",
+	-- 	event = on_file_open,
+	-- },
 	-- {
 	--     'SmiteshP/nvim-navic',
 	-- },
