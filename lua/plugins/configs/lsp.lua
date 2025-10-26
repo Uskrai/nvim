@@ -83,7 +83,6 @@ vim.lsp.config("*", {
 vim.lsp.enable("pylsp")
 vim.lsp.enable("ruff")
 vim.lsp.enable("eslint")
-vim.lsp.enable("ts_ls")
 vim.lsp.enable("clangd")
 vim.lsp.enable("zls")
 vim.lsp.enable("gopls")
@@ -125,7 +124,7 @@ vim.lsp.config("lua_ls", {
 
 vim.lsp.config("ts_ls", {
 
-	root_dir = require("lspconfig").util.root_pattern("package.json"),
+	-- root_dir = require("lspconfig").util.root_pattern("package.json"),
 	single_file_support = false,
 })
 
