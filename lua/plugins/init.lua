@@ -598,6 +598,22 @@ require("lazy").setup({
 	},
 
 	{
+		"stevearc/overseer.nvim",
+		opts = { templates = { "builtin" } },
+		tag = "v1.6.0",
+		keys = {
+			{
+				"<leader>rt",
+				":OverseerToggle<cr>",
+			},
+			{
+				"<leader>rr",
+				":OverseerRun<cr>"
+			}
+		},
+	},
+
+	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
