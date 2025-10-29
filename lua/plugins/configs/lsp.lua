@@ -50,6 +50,13 @@ local on_attach = function(client, bufnr)
 	vim.lsp.inlay_hint.enable(true)
 end
 
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+		on_attach(client, ev.buf)
+	end,
+})
+
 local lsp_flags = {
 	-- This is the default in Nvim 0.7+
 	debounce_text_changes = 150,
@@ -75,7 +82,7 @@ local lspconfig = require("lspconfig")
 -- }
 
 vim.lsp.config("*", {
-	on_attach = on_attach,
+	-- on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
 })
@@ -92,7 +99,6 @@ vim.lsp.enable("dockerls")
 vim.lsp.enable("jdtls")
 vim.lsp.enable("csharp_ls")
 vim.lsp.enable("dartls")
-
 
 vim.lsp.enable("intelephense")
 vim.lsp.config("intelephense", {
