@@ -775,7 +775,7 @@ require("lazy").setup({
 	--     setup = require "lazy_load".on_file_open "FastFold",
 	-- }
 
-	{"https://github.com/mbbill/undotree"},
+	{ "https://github.com/mbbill/undotree" },
 
 	-- {
 	--     'Iron-E/rust.vim',
