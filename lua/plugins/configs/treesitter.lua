@@ -41,6 +41,21 @@ require("nvim-treesitter").install({
 	"dot",
 	"make",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: enable treesitter highlighting",
+	callback = function(ctx)
+		-- highlights
+		local hasStarted = pcall(vim.treesitter.start, ctx.buf) -- errors for filetypes with no parser
+
+		-- indent
+		local dontUseTreesitterIndent = {}
+		if hasStarted and not vim.list_contains(dontUseTreesitterIndent, ctx.match) then
+			vim.bo[ctx.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		end
+	end,
+})
+
 require("nvim-treesitter").setup({
 	install_dir = vim.fn.stdpath("data") .. "/tree-sitter",
 	playground = {
