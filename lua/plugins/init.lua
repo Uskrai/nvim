@@ -33,15 +33,8 @@ end
 require("lazy").setup({
 	{ "dstein64/vim-startuptime", lazy = false },
 	{ "nvim-lua/plenary.nvim" },
-	{
-		"ggandor/leap.nvim",
-		opts = true,
-		event = on_file_open,
-		init = function()
-			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
-			vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
-		end,
-	},
+
+	-- treesitter {{
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -75,7 +68,7 @@ require("lazy").setup({
 		event = on_file_open,
 		after = "nvim-treesitter",
 	},
-	-- treesitter plugin
+	-- }} treesitter
 	-- {
 	-- 	"nvim-treesitter/playground",
 	-- 	event = on_file_open,
@@ -83,35 +76,6 @@ require("lazy").setup({
 	-- {
 	--     'SmiteshP/nvim-navic',
 	-- },
-
-	{
-		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
-		config = function()
-			-- This module contains a number of default definitions
-			local rainbow_delimiters = require("rainbow-delimiters")
-			vim.g.rainbow_delimiters = {
-				strategy = {
-					[""] = rainbow_delimiters.strategy["global"],
-					commonlisp = rainbow_delimiters.strategy["local"],
-				},
-				query = {
-					[""] = "rainbow-delimiters",
-					latex = "rainbow-blocks",
-				},
-				highlight = {
-					"RainbowDelimiterRed",
-					"RainbowDelimiterYellow",
-					"RainbowDelimiterBlue",
-					"RainbowDelimiterOrange",
-					"RainbowDelimiterGreen",
-					"RainbowDelimiterViolet",
-					"RainbowDelimiterCyan",
-				},
-			}
-		end,
-		lazy = true,
-		event = on_file_open,
-	},
 
 	{ "folke/todo-comments.nvim" },
 	{
@@ -221,6 +185,8 @@ require("lazy").setup({
 	--
 	-- -- LSP
 	-- -- use {'neoclide/coc.nvim', run = {'yarn install --frozen-lockfile'}}
+
+	-- LSP {{
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
@@ -248,6 +214,22 @@ require("lazy").setup({
 	},
 
 	{
+		"j-hui/fidget.nvim",
+		lazy = true,
+		event = on_file_open,
+		branch = "legacy",
+		-- opts = true,
+		-- after = 'nvim-lspconfig',
+		config = function()
+			require("fidget").setup({
+				window = {
+					blend = 0,
+				},
+			})
+		end,
+	},
+
+	{
 		"aznhe21/actions-preview.nvim",
 		lazy = true,
 		event = on_file_open,
@@ -266,40 +248,7 @@ require("lazy").setup({
 		"mrcjkb/rustaceanvim",
 		lazy = true, -- This plugin is already lazy
 	},
-	-- {
-	--     'simrat39/rust-tools.nvim',
-	--     dependencies = {
-	--         'neovim/nvim-lspconfig',
-	--     },
-	--     -- ft = 'rust',
-	--     -- opts = true,
-	--     after = 'nvim-lspconfig',
-	--     config = load_config("rust-tools")
-	--     -- config = require "lazy_load".create_config "rust-tools"
-	-- },
 
-	-- {
-	--     'akinsho/flutter-tools.nvim',
-	--     dependencies = {
-	--         'neovim/nvim-lspconfig',
-	--     },
-	-- },
-
-	{
-		"j-hui/fidget.nvim",
-		lazy = true,
-		event = on_file_open,
-		branch = "legacy",
-		-- opts = true,
-		-- after = 'nvim-lspconfig',
-		config = function()
-			require("fidget").setup({
-				window = {
-					blend = 0,
-				},
-			})
-		end,
-	},
 	{
 		"ThePrimeagen/refactoring.nvim",
 		-- opts = true,
@@ -308,6 +257,7 @@ require("lazy").setup({
 		--     "nvim-lua/plenary.nvim",
 		-- }
 	},
+
 	{
 		"nvimtools/none-ls.nvim",
 		dependencies = {
@@ -320,64 +270,7 @@ require("lazy").setup({
 		config = load_config("null-ls"),
 		-- config = require "lazy_load".create_config "null-ls",
 	},
-	{
-		"stevearc/conform.nvim",
-		lazy = true,
-		event = on_file_open,
-		config = load_config("conform"),
-	},
-	{
-		"MagicDuck/grug-far.nvim",
-		lazy = true,
-		cmd = { "GrugFar", "GrugFarWithin" },
-		opts = {
-			engine = "ripgrep",
-		},
-	},
 
-	{
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		event = on_file_open,
-	},
-
-	-- -- completion
-	-- -- use { 'ms-jpq/coq_nvim' }
-	{
-		"hrsh7th/nvim-cmp",
-		lazy = true,
-		event = { "CmdLineEnter", table.unpack(on_file_open) },
-		config = load_config("nvim-cmp"),
-		dependencies = {
-			-- 'windwp/nvim-autopairs',
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-			"saadparwaiz1/cmp_luasnip",
-		},
-		-- after = { 'cmp-nvim-lsp', 'cmp-nvim-lsp-signature-help', 'lsp_lines.nvim' }
-	},
-	{
-		"kosayoda/nvim-lightbulb",
-		lazy = true,
-		event = on_file_open,
-		dependencies = {
-			"antoinemadec/FixCursorHold.nvim",
-		},
-		after = "nvim-lspconfig",
-		config = function()
-			require("nvim-lightbulb").setup({
-				autocmd = { enabled = true },
-				ignore = {
-					ft = {
-						"none-ls",
-					},
-				},
-			})
-		end,
-	},
 	{
 		"folke/trouble.nvim",
 		opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -415,9 +308,85 @@ require("lazy").setup({
 			},
 		},
 	},
+	-- }} LSP
+
+	{
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		event = on_file_open,
+	},
+
+	-- -- completion
+	-- -- use { 'ms-jpq/coq_nvim' }
+	{
+		"hrsh7th/nvim-cmp",
+		lazy = true,
+		event = { "CmdLineEnter", table.unpack(on_file_open) },
+		config = load_config("nvim-cmp"),
+		dependencies = {
+			-- 'windwp/nvim-autopairs',
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+			"saadparwaiz1/cmp_luasnip",
+		},
+		-- after = { 'cmp-nvim-lsp', 'cmp-nvim-lsp-signature-help', 'lsp_lines.nvim' }
+	},
+
+	{
+		"kosayoda/nvim-lightbulb",
+		lazy = true,
+		event = on_file_open,
+		dependencies = {
+			"antoinemadec/FixCursorHold.nvim",
+		},
+		after = "nvim-lspconfig",
+		config = function()
+			require("nvim-lightbulb").setup({
+				autocmd = { enabled = true },
+				ignore = {
+					ft = {
+						"none-ls",
+					},
+				},
+			})
+		end,
+	},
+
+	{
+		"ggandor/leap.nvim",
+		opts = true,
+		event = on_file_open,
+		init = function()
+			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
+			vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
+		end,
+	},
+
+	{ "https://github.com/mbbill/undotree" },
+
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = {
+			"kevinhwang91/promise-async",
+		},
+		-- opts = true,
+		config = load_config("nvim-ufo"),
+		lazy = true,
+		event = on_file_open,
+		-- config = require "lazy_load".create_config "nvim-ufo",
+	},
 	-- }}Editing
 
 	-- Appereance{{
+	{
+		"kyazdani42/nvim-web-devicons",
+		-- opts = true,
+		event = on_file_open,
+	},
+
 	{
 		"hoob3rt/lualine.nvim",
 		lazy = true,
@@ -469,10 +438,17 @@ require("lazy").setup({
 		end,
 	},
 
-	-- use {
-	--     'arcticicestudio/nord-vim',
-	--     branch = "main"
-	-- }
+	{
+		"romgrk/barbar.nvim",
+		dependencies = { "nvim-web-devicons" },
+		init = function()
+			vim.g.barbar_auto_setup = false
+		end,
+		-- opts = {},
+		config = load_config("barbar"),
+		-- opts = true,
+		event = on_file_open,
+	},
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -494,7 +470,38 @@ require("lazy").setup({
 			-- refer to the configuration section below
 		},
 	},
+
+	{
+		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
+		config = function()
+			-- This module contains a number of default definitions
+			local rainbow_delimiters = require("rainbow-delimiters")
+			vim.g.rainbow_delimiters = {
+				strategy = {
+					[""] = rainbow_delimiters.strategy["global"],
+					commonlisp = rainbow_delimiters.strategy["local"],
+				},
+				query = {
+					[""] = "rainbow-delimiters",
+					latex = "rainbow-blocks",
+				},
+				highlight = {
+					"RainbowDelimiterRed",
+					"RainbowDelimiterYellow",
+					"RainbowDelimiterBlue",
+					"RainbowDelimiterOrange",
+					"RainbowDelimiterGreen",
+					"RainbowDelimiterViolet",
+					"RainbowDelimiterCyan",
+				},
+			}
+		end,
+		lazy = true,
+		event = on_file_open,
+	},
+
 	-- }} appereance
+
 	{
 		"editorconfig/editorconfig-vim",
 		-- opts = true,
@@ -503,43 +510,6 @@ require("lazy").setup({
 			require("editorconfig")
 		end,
 	},
-	{ "junegunn/fzf" },
-	{
-		"junegunn/fzf.vim",
-		name = "fzf.vim",
-		dependencies = { "junegunn/fzf" },
-		-- opts = true,
-		cmd = lazy_load.fzf_cmds,
-	},
-	--
-	-- -- use { 'jackguo380/vim-lsp-cxx-highlight' }
-	--
-	-- use {
-	--     'sheerun/vim-polyglot',
-	--     opts = true,
-	-- }
-	"jwalton512/vim-blade",
-	--
-	-- use {
-	--     'derekwyatt/vim-fswitch',
-	--     opts = true,
-	--     ft = {
-	--         'cpp',
-	--         'c'
-	--     }
-	-- }
-	--
-	-- use { 'farmergreg/vim-lastplace' }
-
-	-- {
-	--     'luochen1990/rainbow',
-	--     -- opts = true,
-	--     event = on_file_open,
-	-- },
-
-	-- use { 'andrejlevkovitch/vim-lua-format' }
-
-	-- use {'raymond-w-ko/vim-lua-indent'}
 
 	-- Tooling {{
 	{
@@ -554,16 +524,20 @@ require("lazy").setup({
 		run = "make",
 		after = "telescope.nvim",
 	},
-	-- use {
-	--     "nvim-telescope/telescope-frecency.nvim",
-	--     requires = { "tami5/sqlite.lua" },
-	--     after = 'telescope.nvim',
-	-- }
 
 	{
 		"nvim-pack/nvim-spectre",
 		after = "nvim-lua/plenary.nvim",
 		config = load_config("spectre"),
+	},
+
+	{
+		"MagicDuck/grug-far.nvim",
+		lazy = true,
+		cmd = { "GrugFar", "GrugFarWithin" },
+		opts = {
+			engine = "ripgrep",
+		},
 	},
 
 	{
@@ -632,31 +606,42 @@ require("lazy").setup({
 			},
 		},
 	},
-	-- }} Tooling
 
-	-- document reading {{
 	{
-		"lervag/vimtex",
-		ft = "tex",
+		"https://github.com/folke/snacks.nvim",
+		opts = {
+			indent = {},
+			bigfile = {},
+			input = {
+				-- position = "right",
+			},
+			picker = {},
+			styles = {
+				input = {
+					relative = "cursor",
+					title_pos = "bottom",
+				},
+			},
+		},
 	},
-	-- }} document reading
 
-	-- {
-	--     'rmagatti/auto-session',
-	--     lazy = false,
-	--     init = function()
-	--         vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-	--         -- vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages"
-	--         -- vim.o.sessionoptions = "buffers,curdir,folds,help,options,tabpages,resize,winpos"
-	--     end,
-	--     opts = {}
-	--     -- config = function()
-	--     --     require("auto-session").setup {
-	--     --
-	--     --     }
-	--     -- end
-	-- },
-	-- Lua
+	{ "junegunn/fzf" },
+
+	{
+		"junegunn/fzf.vim",
+		name = "fzf.vim",
+		dependencies = { "junegunn/fzf" },
+		-- opts = true,
+		cmd = lazy_load.fzf_cmds,
+	},
+
+	{
+		"stevearc/conform.nvim",
+		lazy = true,
+		event = on_file_open,
+		config = load_config("conform"),
+	},
+
 	{
 		"folke/persistence.nvim",
 		lazy = false,
@@ -694,23 +679,7 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"kyazdani42/nvim-web-devicons",
-		-- opts = true,
-		event = on_file_open,
-	},
-
-	{
-		"romgrk/barbar.nvim",
-		dependencies = { "nvim-web-devicons" },
-		init = function()
-			vim.g.barbar_auto_setup = false
-		end,
-		-- opts = {},
-		config = load_config("barbar"),
-		-- opts = true,
-		event = on_file_open,
-	},
+	-- }} Tooling
 
 	{
 		"vyfor/cord.nvim",
@@ -756,17 +725,6 @@ require("lazy").setup({
 	{
 		"kevinhwang91/promise-async",
 	},
-	{
-		"kevinhwang91/nvim-ufo",
-		dependencies = {
-			"kevinhwang91/promise-async",
-		},
-		-- opts = true,
-		config = load_config("nvim-ufo"),
-		lazy = true,
-		event = on_file_open,
-		-- config = require "lazy_load".create_config "nvim-ufo",
-	},
 
 	-- FOLD
 	-- use {
@@ -775,13 +733,16 @@ require("lazy").setup({
 	--     setup = require "lazy_load".on_file_open "FastFold",
 	-- }
 
-	{ "https://github.com/mbbill/undotree" },
-
+	-- Language {{
 	-- {
 	--     'Iron-E/rust.vim',
 	--     ft = 'rust',
 	--     branch = "feature/struct-definition-identifiers"
 	-- },
+
+	"tyru/open-browser.vim",
+	-- "weirongxu/plantuml-previewer.vim",
+	"liuchengxu/graphviz.vim",
 
 	{
 		"udalov/kotlin-vim",
@@ -801,49 +762,36 @@ require("lazy").setup({
 		"aklt/plantuml-syntax",
 	},
 
-	"tyru/open-browser.vim",
-	-- "weirongxu/plantuml-previewer.vim",
-	"liuchengxu/graphviz.vim",
-
-	-- -- note taking
+	{
+		"lervag/vimtex",
+		ft = "tex",
+	},
+	--
+	-- -- use { 'jackguo380/vim-lsp-cxx-highlight' }
+	--
+	-- use {
+	--     'sheerun/vim-polyglot',
+	--     opts = true,
+	-- }
+	"jwalton512/vim-blade",
 	-- {
-	--     'phaazon/mind.nvim',
-	--     branch = 'v2.2',
-	--     dependencies = { 'nvim-lua/plenary.nvim' },
-	--     cmd = {
-	--         'MindOpenMain',
-	--         'MindOpenProject',
-	--         'MindOpenSmartProject',
-	--         'MindReloadState',
-	--         'MindClose'
+	--     'simrat39/rust-tools.nvim',
+	--     dependencies = {
+	--         'neovim/nvim-lspconfig',
 	--     },
-	--     config = function()
-	--         require 'mind'.setup()
-	--     end
+	--     -- ft = 'rust',
+	--     -- opts = true,
+	--     after = 'nvim-lspconfig',
+	--     config = load_config("rust-tools")
+	--     -- config = require "lazy_load".create_config "rust-tools"
 	-- },
 
-	-- use { 'ja-ford/delaytrain.nvim',
-	--     config = function()
-	--         require('delaytrain').setup {
-	--             delay_ms = 1000,
-	--         }
-	--     end
-	-- };
-	{
-		"https://github.com/folke/snacks.nvim",
-		opts = {
-			indent = {},
-			bigfile = {},
-			input = {
-				-- position = "right",
-			},
-			picker = {},
-			styles = {
-				input = {
-					relative = "cursor",
-					title_pos = "bottom",
-				},
-			},
-		},
-	},
+	-- {
+	--     'akinsho/flutter-tools.nvim',
+	--     dependencies = {
+	--         'neovim/nvim-lspconfig',
+	--     },
+	-- },
+
+	-- }} Language
 })
