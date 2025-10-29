@@ -70,7 +70,14 @@ capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabil
 			dynamicRegistration = false,
 		},
 	},
+	textDocument = {
+		foldingRange = {
+			dynamicRegistration = false,
+			lineFoldingOnly = true,
+		},
+	},
 })
+
 -- local capabilities = require"coq".lsp_ensure_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lspconfig = require("lspconfig")
