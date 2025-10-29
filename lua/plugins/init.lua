@@ -619,7 +619,6 @@ require("lazy").setup({
 			styles = {
 				input = {
 					relative = "cursor",
-					title_pos = "bottom",
 				},
 			},
 		},
