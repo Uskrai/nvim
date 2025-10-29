@@ -594,6 +594,9 @@ require("lazy").setup({
 		"stevearc/overseer.nvim",
 		opts = { templates = { "builtin" } },
 		tag = "v1.6.0",
+		dependencies = {
+			"stevearc/dressing.nvim",
+		},
 		keys = {
 			{
 				"<leader>rt",
@@ -601,8 +604,8 @@ require("lazy").setup({
 			},
 			{
 				"<leader>rr",
-				":OverseerRun<cr>"
-			}
+				":OverseerRun<cr>",
+			},
 		},
 	},
 
