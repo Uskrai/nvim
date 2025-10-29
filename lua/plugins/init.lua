@@ -425,14 +425,6 @@ require("lazy").setup({
 		config = load_config("status"),
 		-- config = require "lazy_load".create_config "status"
 	},
-	{
-		"stevearc/dressing.nvim",
-		-- opts = true,
-		event = on_file_open,
-		config = function()
-			require("dressing").setup()
-		end,
-	},
 
 	{
 		"catppuccin/nvim",
@@ -594,9 +586,6 @@ require("lazy").setup({
 		"stevearc/overseer.nvim",
 		opts = { templates = { "builtin" } },
 		tag = "v1.6.0",
-		dependencies = {
-			"stevearc/dressing.nvim",
-		},
 		keys = {
 			{
 				"<leader>rt",
@@ -830,6 +819,16 @@ require("lazy").setup({
 		opts = {
 			indent = {},
 			bigfile = {},
+			input = {
+				-- position = "right",
+			},
+			picker = {},
+			styles = {
+				input = {
+					relative = "cursor",
+					title_pos = "bottom"
+				},
+			},
 		},
 	},
 })
