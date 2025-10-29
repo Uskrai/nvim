@@ -41,13 +41,6 @@ require("lazy").setup({
 			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
 			vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
 		end,
-		event = on_file_open,
-	},
-	{
-		"tris203/precognition.nvim",
-		opts = {},
-		event = on_file_open,
-		cmd = { "Precognition" },
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
