@@ -13,12 +13,19 @@ vim.api.nvim_create_autocmd("WinLeave", {
 })
 
 telescope.setup({
+	defaults = {
+		sorting_strategy = "ascending",
+		layout_strategy = "vertical",
+		layout_config = {
+			preview_cutoff = 1, -- Preview should always show (unless previewer = false)
+			prompt_position = "bottom",
+		},
+	},
 	pickers = {
 		find_files = {
 			follow = true,
 		},
 	},
-	defaults = vim.tbl_extend("force", require("telescope.themes").get_ivy(), {}),
 })
 
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
