@@ -427,6 +427,21 @@ require("lazy").setup({
 	},
 
 	{
+		"Bekaboo/dropbar.nvim",
+		-- optional, but required for fuzzy finder support
+		dependencies = {
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+		},
+		config = function()
+			local dropbar_api = require("dropbar.api")
+			vim.keymap.set("n", "<leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+			vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+			vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+		end,
+	},
+
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		config = function()
@@ -826,7 +841,7 @@ require("lazy").setup({
 			styles = {
 				input = {
 					relative = "cursor",
-					title_pos = "bottom"
+					title_pos = "bottom",
 				},
 			},
 		},
