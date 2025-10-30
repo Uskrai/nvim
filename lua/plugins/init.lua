@@ -335,34 +335,73 @@ require("lazy").setup({
 		-- after = { 'cmp-nvim-lsp', 'cmp-nvim-lsp-signature-help', 'lsp_lines.nvim' }
 	},
 
-	{
-		"kosayoda/nvim-lightbulb",
-		lazy = true,
-		event = on_file_open,
-		dependencies = {
-			"antoinemadec/FixCursorHold.nvim",
-		},
-		after = "nvim-lspconfig",
-		config = function()
-			require("nvim-lightbulb").setup({
-				autocmd = { enabled = true },
-				ignore = {
-					ft = {
-						"none-ls",
-					},
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"kosayoda/nvim-lightbulb",
+	-- 	lazy = true,
+	-- 	event = on_file_open,
+	-- 	dependencies = {
+	-- 		"antoinemadec/FixCursorHold.nvim",
+	-- 	},
+	-- 	after = "nvim-lspconfig",
+	-- 	config = function()
+	-- 		require("nvim-lightbulb").setup({
+	-- 			autocmd = { enabled = true },
+	-- 			ignore = {
+	-- 				ft = {
+	-- 					"none-ls",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 
 	{
-		"ggandor/leap.nvim",
-		opts = true,
-		event = on_file_open,
-		init = function()
-			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
-			vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
-		end,
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter_search()
+				end,
+				desc = "Treesitter Search",
+			},
+			{
+				"<c-s>",
+				mode = { "c" },
+				function()
+					require("flash").toggle()
+				end,
+				desc = "Toggle Flash Search",
+			},
+		},
 	},
 
 	{ "https://github.com/mbbill/undotree" },
