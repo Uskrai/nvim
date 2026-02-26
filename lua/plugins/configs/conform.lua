@@ -15,6 +15,7 @@ require("conform").setup({
 		toml = { "taplo" },
 		python = { "ruff" },
 		php = { "pint", "prettierd", "prettier", stop_after_first = true },
+		terraform = { 'tofu_fmt' },
 	},
 })
 
