@@ -201,17 +201,17 @@ require("lazy").setup({
 		-- config = require "lazy_load".create_config "lsp",
 	},
 
-	{
-		"felpafel/inlay-hint.nvim",
-		event = "LspAttach",
-		branch = "nightly",
-		opts = {
-			virt_text_pos = "eol",
-		},
-		-- config = function()
-		--     require("lsp-inlayhints").setup()
-		-- end
-	},
+	-- {
+	-- 	"felpafel/inlay-hint.nvim",
+	-- 	event = "LspAttach",
+	-- 	branch = "nightly",
+	-- 	opts = {
+	-- 		virt_text_pos = "eol",
+	-- 	},
+	-- 	-- config = function()
+	-- 	--     require("lsp-inlayhints").setup()
+	-- 	-- end
+	-- },
 
 	{
 		"j-hui/fidget.nvim",
