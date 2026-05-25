@@ -138,14 +138,13 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
-vim.lsp.enable("ts_ls")
-vim.lsp.config("ts_ls", {
+vim.lsp.enable("vtsls")
+vim.lsp.config("vtsls", {
 
 	-- root_dir = require("lspconfig").util.root_pattern("package.json"),
 	single_file_support = false,
 })
 
-vim.lsp.enable("ts_ls")
 vim.lsp.config("denols", {
 	root_dir = require("lspconfig").util.root_pattern("deno.json"),
 })
