@@ -486,7 +486,6 @@ require("lazy").setup({
 		-- opts = {},
 		config = load_config("barbar"),
 		-- opts = true,
-		event = on_file_open,
 	},
 
 	{
