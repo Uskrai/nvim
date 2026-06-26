@@ -729,8 +729,8 @@ require("lazy").setup({
 			}
 
 			local is_blacklisted = function(opts)
-				for value in pairs(blacklist) do
-					if string.match(opts.workspace, value) then
+				for _, value in pairs(blacklist) do
+					if string.match(opts.workspace_dir, value) then
 						return true
 					end
 				end
@@ -745,7 +745,11 @@ require("lazy").setup({
 						return is_blacklisted(opts) and "Editing a file" or ("Editing " .. opts.filename)
 					end,
 					workspace = function(opts)
-						return is_blacklisted(opts) and "In a secret workspace" or ("Working on " .. opts.workspace)
+						if is_blacklisted(opts) then
+							return 'Working'
+						end
+
+						return "Working on " .. opts.workspace
 					end,
 				},
 			})
