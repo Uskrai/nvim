@@ -611,7 +611,7 @@ require("lazy").setup({
 
 	{
 		"stevearc/overseer.nvim",
-		opts = { templates = { "builtin" } },
+		opts = { templates = { "builtin", "dart" } },
 		tag = "v1.6.0",
 		keys = {
 			{
