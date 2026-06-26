@@ -93,6 +93,20 @@ require("lazy").setup({
 			"DiffviewOpen",
 		},
 	},
+	{
+		"mistweaverco/diffconflicts.nvim",
+		opts = {
+			-- Quality-of-life options
+			qol = {
+				-- After saving (:w), automatically close the diff view and jump to the next
+				-- conflict in the file (if any).
+				advance_on_save = true,
+				-- If no conflicts remain after saving, quit Neovim (:qa). This is useful
+				-- when running from `git mergetool` / `jj resolve`.
+				quit_on_done = true,
+			},
+		},
+	},
 
 	-- {
 	--     'tpope/vim-surround',
