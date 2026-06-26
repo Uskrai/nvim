@@ -782,7 +782,7 @@ require("lazy").setup({
 	-- },
 
 	"tyru/open-browser.vim",
-	-- "weirongxu/plantuml-previewer.vim",
+	"charlesnicholson/plantuml.nvim",
 	"liuchengxu/graphviz.vim",
 
 	{
