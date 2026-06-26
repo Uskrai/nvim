@@ -1,7 +1,15 @@
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
-require("barbar").setup({})
+require("barbar").setup({
+	icons = {
+		pinned = {
+			button = "",
+			filename = true,
+		},
+	},
+	preset = "powerline",
+})
 
 -- Move to previous/next
 map("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
