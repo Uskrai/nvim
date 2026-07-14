@@ -106,6 +106,7 @@ vim.lsp.enable("dockerls")
 vim.lsp.enable("jdtls")
 vim.lsp.enable("csharp_ls")
 vim.lsp.enable("dartls")
+vim.lsp.enable("marksman")
 
 vim.lsp.enable("intelephense")
 vim.lsp.config("intelephense", {
@@ -138,6 +139,11 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+-- vim.lsp.config('denols', {
+--     root_markers = { "deno.json", "deno.jsonc", "deno.lock" },
+-- })
+-- vim.lsp.enable('denols')
+
 vim.lsp.enable("vtsls")
 vim.lsp.config("vtsls", {
 
@@ -145,9 +151,9 @@ vim.lsp.config("vtsls", {
 	single_file_support = false,
 })
 
-vim.lsp.config("denols", {
-	root_dir = require("lspconfig").util.root_pattern("deno.json"),
-})
+-- vim.lsp.config("denols", {
+-- 	root_dir = require("lspconfig").util.root_pattern("deno.json"),
+-- })
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 
